@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "website-2019",
+  "alias": ["api.webconf.tech"],
+  "builds": [{ "src": "lambdas/*.js", "use": "@now/node" }],
+  "routes": [
+    { "src": "/lambdas/mail_save", "dest": "/v1/mail_save.js" },
+    { "src": "/lambdas/mail_send", "dest": "/v1/mail_send.js" }
+  ]
+}
