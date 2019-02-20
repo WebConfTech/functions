@@ -7,13 +7,14 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "clean-deploys": "now rm $INSTANCE_NAME --safe --token $NOW_TOKEN --yes",
-    "deploy": "now alias $(now --name $INSTANCE_NAME -e CACHE_EXPIRATION=$CACHE_EXPIRATION -e ORGANIZERS=$ORGANIZERS -e TOKEN=$TOKEN --npm --token $NOW_TOKEN) $INSTANCE_NAME --token=$NOW_TOKEN",
+    "clean-deploys": "now rm $NOW_INSTANCE_NAME --safe --token $NOW_TOKEN --yes",
+    "deploy": "now alias $(now --name=$NOW_INSTANCE_NAME) $NOW_INSTANCE_NAME --token=$NOW_TOKEN",
     "dev": "micro-dev -p ${PORT:-4003}",
-    "scale": "now scale $INSTANCE_NAME.now.sh sfo 1 --token $NOW_TOKEN",
+    "scale": "now scale $NOW_INSTANCE_NAME.now.sh sfo 1 --token $NOW_TOKEN",
     "start": "micro"
   },
   "dependencies": {
+    "dotenv": "^6.2.0",
     "mailgun-js": "^0.22.0",
     "micro": "^9.3.3",
     "statuses": "^1.5.0"
@@ -21,6 +22,7 @@
   "devDependencies": {
     "husky": "^1.3.1",
     "micro-dev": "^3.0.0",
+    "now": "^14.0.0",
     "now-lambda-runner": "^3.2.0",
     "pretty-quick": "^1.10.0"
   }

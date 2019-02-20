@@ -10,7 +10,7 @@ Colección de servicios lambda utilizados por WebConf.
 
 ## Desarrollo
 
-> Antes de empezar, duplicar el archivo `.env-template`, nombrarlo como `.env` y reemplazar por los valores que se necesiten
+> Antes de empezar, duplicar el archivo `.env.development`, nombrarlo como `.env` y reemplazar por los valores que se necesiten
 
 ```bash
 npm install
