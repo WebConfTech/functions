@@ -1,11 +1,18 @@
 {
-  "name": "lambdas-now",
+  "name": "functions",
   "version": "0.0.1",
   "description": "A collection of lambdas services for the WebConf.",
-  "repository": "git@github.com:WebConfTech/lambdas-now.git",
+  "repository": "git@github.com:WebConfTech/functions.git",
   "author": "Ata Sanchez <gahs94@gmail.com>",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "clean-deploys": "now rm $INSTANCE_NAME --safe --token $NOW_TOKEN --yes",
+    "deploy": "now alias $(now --name $INSTANCE_NAME -e CACHE_EXPIRATION=$CACHE_EXPIRATION -e ORGANIZERS=$ORGANIZERS -e TOKEN=$TOKEN --npm --token $NOW_TOKEN) $INSTANCE_NAME --token=$NOW_TOKEN",
+    "dev": "micro-dev -p ${PORT:-4003}",
+    "scale": "now scale $INSTANCE_NAME.now.sh sfo 1 --token $NOW_TOKEN",
+    "start": "micro"
+  },
   "dependencies": {
     "mailgun-js": "^0.22.0",
     "micro": "^9.3.3",

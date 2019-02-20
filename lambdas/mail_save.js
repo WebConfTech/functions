@@ -10,9 +10,6 @@ const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\
 module.exports = async (req, res) => {
   const { address } = await json(req);
 
-  let message;
-  let status = statuses['bad request'];
-
   if (address && address.match(emailRegex)) {
     return mailgun({ apiKey, domain })
       .lists(listName)
