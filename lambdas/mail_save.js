@@ -2,8 +2,6 @@ if (process.env.NODE_ENV === 'development') {
   require('dotenv').config();
 }
 
-require('dotenv').config();
-
 const domain = process.env.MAILGUN_DOMAIN;
 const apiKey = process.env.MAILGUN_API_KEY;
 const listName = process.env.MAILGUN_LIST;
