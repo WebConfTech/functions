@@ -2,8 +2,6 @@ if (process.env.NODE_ENV === 'development') {
   require('dotenv').config();
 }
 
-require('dotenv').config();
-
 const mailgun = require('mailgun-js');
 const statuses = require('statuses');
 const { json, send } = require('micro');
