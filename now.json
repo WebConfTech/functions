@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "website-2019",
+  "name": "functions",
   "alias": ["api.webconf.tech"],
   "builds": [{ "src": "lambdas/*.js", "use": "@now/node" }],
   "routes": [
