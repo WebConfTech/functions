@@ -11,7 +11,8 @@
     "deploy": "now alias $(now --name=$NOW_INSTANCE_NAME) $NOW_INSTANCE_NAME --token=$NOW_TOKEN",
     "dev": "micro-dev -p ${PORT:-4003}",
     "scale": "now scale $NOW_INSTANCE_NAME.now.sh sfo 1 --token $NOW_TOKEN",
-    "start": "micro"
+    "start": "micro",
+    "test": "echo \"Write tests! -> D:\""
   },
   "dependencies": {
     "dotenv": "^6.2.0",
