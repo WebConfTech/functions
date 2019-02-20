@@ -1,0 +1,15 @@
+sudo: false
+language: node_js
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
+before_deploy:
+  - npm i now --no-save
+deploy:
+  provider: script
+  script: npm run deploy
+  skip_cleanup: true
+  on:
+    branch: master

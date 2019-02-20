@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "functions",
+  "alias": ["api.webconf.tech"],
+  "builds": [{ "src": "lambdas/*.js", "use": "@now/node" }],
+  "routes": [
+    { "src": "/lambdas/mail_save", "dest": "/lambdas/mail_save.js" },
+    { "src": "/lambdas/mail_send", "dest": "/lambdas/mail_send.js" }
+  ]
+}
