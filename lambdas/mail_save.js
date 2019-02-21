@@ -9,11 +9,11 @@ const listName = process.env.MAILGUN_LIST;
 const mailgun = require('mailgun-js');
 const statuses = require('statuses');
 const { json, send } = require('micro');
+const microCors = require('micro-cors')()
 const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
 
-module.exports = async (req, res) => {
+const handler = async (req, res) => {
   const { address } = await json(req);
-  res.setHeader('Access-Control-Allow-Origin', 'https://webconf.tech');
 
   if (address && address.match(emailRegex)) {
     return mailgun({ apiKey, domain })
@@ -35,4 +35,7 @@ module.exports = async (req, res) => {
   }
 
   return send(res, statuses['bad request'], 'Invalid email address');
-};
+}
+
+const cors = microCors({ allowMethods: 'POST', origin:  'https://webconf.tech'});
+module.exports = cors(handler);
