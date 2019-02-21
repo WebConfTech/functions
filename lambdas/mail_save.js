@@ -13,6 +13,10 @@ const microCors = require('micro-cors')
 const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
 
 const handler = async(req, res) => {
+  if (req.method === 'OPTIONS') {
+    return send(res, statuses['ok']) ;
+  }
+
   const { address } = await json(req);
 
   if (address && address.match(emailRegex)) {
