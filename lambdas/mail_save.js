@@ -32,13 +32,13 @@ const handler = async(req, res) => {
           if (err) {
             send(res, statuses['bad request'], err.message);
           } else {
-            send(res, statuses['created'], {message: 'The address was successfully subscribed'});
+            send(res, statuses['created'], 'The address was successfully subscribed');
           }
         }
       );
   }
 
-  return send(res, statuses['bad request'], {message: 'Invalid email address'});
+  return send(res, statuses['bad request'], 'Invalid email address');
 }
 
 const cors = microCors({ allowMethods: ['POST'], origin: 'https://webconf.tech'});
