@@ -13,6 +13,7 @@ const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\
 
 module.exports = async (req, res) => {
   const { address } = await json(req);
+  res.setHeader('Access-Control-Allow-Origin', 'https://webconf.tech');
 
   if (address && address.match(emailRegex)) {
     return mailgun({ apiKey, domain })
