@@ -37,5 +37,5 @@ const handler = async (req, res) => {
   return send(res, statuses['bad request'], 'Invalid email address');
 }
 
-const cors = microCors({ allowMethods: 'POST', origin:  'https://webconf.tech'});
+const cors = microCors({ allowMethods: 'POST', origin: 'https://webconf.tech'});
 module.exports = cors(handler);
