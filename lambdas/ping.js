@@ -3,5 +3,5 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 module.exports = (req, res) => {
-  res.send({ pong: true });
+  res.end(JSON.stringify({ pong: true }));
 };
