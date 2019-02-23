@@ -5,6 +5,7 @@
   "builds": [{ "src": "lambdas/*.js", "use": "@now/node" }],
   "routes": [
     { "src": "/lambdas/mail_save", "dest": "/lambdas/mail_save.js" },
-    { "src": "/lambdas/mail_send", "dest": "/lambdas/mail_send.js" }
+    { "src": "/lambdas/mail_send", "dest": "/lambdas/mail_send.js" },
+    { "src": "/ping", "dest": "/lambdas/ping.js" }
   ]
 }
