@@ -17,14 +17,14 @@
     <mj-section padding-top="30px">
       <mj-column width="100%">
         <mj-text>
-          <p>Gracias por uscribirte!</p>
+          <p>Gracias por suscribirte!</p>
         </mj-text>
       </mj-column>
     </mj-section>
     <mj-section padding-top="30px">
       <mj-column width="100%">
         <mj-text>
-          <p>Próximamente te contactaremospor este medio con mas información.</p>
+          <p>Próximamente te contactaremos por este medio con mas información.</p>
         </mj-text>
       </mj-column>
     </mj-section>
