@@ -9,12 +9,12 @@ const listName = process.env.MAILGUN_LIST;
 const mailgun = require('mailgun-js');
 const statuses = require('statuses');
 const { json, send } = require('micro');
-const microCors = require('micro-cors')
+const microCors = require('micro-cors-multiple-allow-origin');
 const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
 
-const handler = async(req, res) => {
+const handler = async (req, res) => {
   if (req.method === 'OPTIONS') {
-    return send(res, statuses['ok']) ;
+    return send(res, statuses['ok']);
   }
 
   const { address } = await json(req);
@@ -32,14 +32,21 @@ const handler = async(req, res) => {
           if (err) {
             send(res, statuses['bad request'], err.message);
           } else {
-            send(res, statuses['created'], 'La suscripción se ha realizado correctamente');
+            send(
+              res,
+              statuses['created'],
+              'La suscripción se ha realizado correctamente'
+            );
           }
         }
       );
   }
 
   return send(res, statuses['bad request'], 'La dirección de email es inválida');
-}
+};
 
-const cors = microCors({ allowMethods: ['POST'], origin: 'https://webconf.tech'});
+const cors = microCors({
+  allowMethods: ['POST'],
+  origin: ['https://webconf.tech', 'https://www.webconf.tech']
+});
 module.exports = cors(handler);
