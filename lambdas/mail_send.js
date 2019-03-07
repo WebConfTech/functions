@@ -10,6 +10,9 @@ const mjml2html = require('mjml');
 const path = require("path");
 module.exports = (req, res) => {
   fs.readFile(path.resolve(__dirname, '../templates/mail_registration.mjml'), 'utf8', function(err, file) {
+    if (err) {
+      return res.end(err)
+    }
     mailgun({ domain, apiKey })
       .messages()
       .send(
@@ -19,7 +22,7 @@ module.exports = (req, res) => {
           subject: 'WebConf • Nuestro newsletter 🙈',
           html: mjml2html(file).html
         },
-        (error, body) => res.end(JSON.stringify({ error, body }))
+        (error, { id, message }) => res.end(JSON.stringify({ error, id, message }))
       );
   });
 };
