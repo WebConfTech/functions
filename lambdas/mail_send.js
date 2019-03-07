@@ -4,12 +4,12 @@ if (process.env.NODE_ENV === 'development') {
 
 const domain = process.env.MAILGUN_DOMAIN;
 const apiKey = process.env.MAILGUN_API_KEY;
-const fs = require('fs')
+const fs = require('fs');
 const mailgun = require('mailgun-js');
-const mjml2html = require('mjml')
-
+const mjml2html = require('mjml');
+const path = require("path");
 module.exports = (req, res) => {
-  fs.readFile(__dirname + './../templates/mail_registration.mjml', 'utf8', function(err, file) {
+  fs.readFile(path.resolve(__dirname, '../templates/mail_registration.mjml'), 'utf8', function(err, file) {
     mailgun({ domain, apiKey })
       .messages()
       .send(
@@ -21,5 +21,5 @@ module.exports = (req, res) => {
         },
         (error, body) => res.end(JSON.stringify({ error, body }))
       );
-  })
+  });
 };
