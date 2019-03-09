@@ -17,6 +17,7 @@
     "dotenv": "^6.2.0",
     "mailgun-js": "^0.22.0",
     "micro": "^9.3.3",
+    "micro-upload": "^1.0.1",
     "micro-cors-multiple-allow-origin": "^1.0.1",
     "mjml": "^4.4.0-beta.1",
     "statuses": "^1.5.0"
