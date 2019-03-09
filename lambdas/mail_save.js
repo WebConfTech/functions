@@ -12,6 +12,9 @@ const { json, send } = require('micro');
 const microCors = require('micro-cors-multiple-allow-origin');
 const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
 
+const path = require("path");
+const fs = require('fs');
+
 const handler = async (req, res) => {
   if (req.method === 'OPTIONS') {
     return send(res, statuses['ok']);
@@ -37,6 +40,24 @@ const handler = async (req, res) => {
               statuses['created'],
               'La suscripción se ha realizado correctamente'
             );
+
+            fs.readFile(path.resolve(__dirname, '../templates/mail_registration.html'), 'utf8', function(err, html) {
+              if (err) {
+                console.error(err);
+                return;
+              }
+              mailgun({ domain, apiKey })
+                .messages()
+                .send(
+                  {
+                    from: 'WebConf <no-reply@webconf.tech>',
+                    to: address,
+                    subject: 'WebConf • ¡Gracias por Suscribirte!',
+                    html
+                  },
+                  (error, data) => console.log(error, data)
+                );
+            });
           }
         }
       );
