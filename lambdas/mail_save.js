@@ -11,9 +11,29 @@ const statuses = require('statuses');
 const { json, send } = require('micro');
 const microCors = require('micro-cors-multiple-allow-origin');
 const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
-
 const path = require("path");
 const fs = require('fs');
+
+let emailTemplate;
+let emailTemplateError = false;
+const getEmailTemplate = () => {
+  if (emailTemplateError) {
+    return;
+  }
+  if (!emailTemplate) {
+    try {
+      emailTemplate = fs.readFileSync(
+        path.resolve(__dirname, '../templates/mail_registration.html'),
+        'utf8'
+      );
+    } catch (error) {
+      emailTemplateError = true;
+      console.error(error);
+      return;
+    }
+  }
+  return emailTemplate;
+}
 
 const handler = async (req, res) => {
   if (req.method === 'OPTIONS') {
@@ -41,23 +61,18 @@ const handler = async (req, res) => {
               'La suscripción se ha realizado correctamente'
             );
 
-            fs.readFile(path.resolve(__dirname, '../templates/mail_registration.html'), 'utf8', function(err, html) {
-              if (err) {
-                console.error(err);
-                return;
-              }
-              mailgun({ domain, apiKey })
-                .messages()
-                .send(
-                  {
-                    from: 'WebConf <no-reply@webconf.tech>',
-                    to: address,
-                    subject: 'WebConf • ¡Gracias por Suscribirte!',
-                    html
-                  },
-                  (error, data) => console.log(error, data)
-                );
-            });
+            const html = getEmailTemplate();
+            mailgun({ domain, apiKey })
+              .messages()
+              .send(
+                {
+                  from: 'WebConf <no-reply@webconf.tech>',
+                  to: address,
+                  subject: 'WebConf • ¡Gracias por suscribirte!',
+                  html
+                },
+                (error, { message }) => console.error(error, message)
+              );
           }
         }
       );
