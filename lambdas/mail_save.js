@@ -54,6 +54,7 @@ const handler = async (req, res) => {
           if (err) {
             send(res, statuses['bad request'], err.message);
           } else {
+            console.log('ENV', require('../env'));
             send(
               res,
               statuses['created'],
