@@ -1,4 +1,6 @@
-if (process.env.NODE_ENV !== 'development') {
+let development;
+if (process.env.NODE_ENV !== 'production') {
+  development = true;
   require('now-env');
 }
 
@@ -12,8 +14,11 @@ const requiredKeys = [
 
 let envVars = {};
 if (
-  process.env.NOW_GITHUB_COMMIT_REF === 'master' ||
-  !process.env.NOW_GITHUB_COMMIT_REF
+  !development &&
+  (
+    process.env.NOW_GITHUB_COMMIT_REF === 'master' ||
+    !process.env.NOW_GITHUB_COMMIT_REF
+  )
 ) {
   envVars = requiredKeys.reduce((acc, key) => ({ ...acc, [key]: process.env[key] }), {});
 } else {
