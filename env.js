@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'development') {
+  require('now-env');
+}
+
 const stagingPrefix = 'STAGING_';
 const requiredKeys = [
   'MAILGUN_API_KEY',
