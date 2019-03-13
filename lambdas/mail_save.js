@@ -54,24 +54,25 @@ const handler = async (req, res) => {
           if (err) {
             send(res, statuses['bad request'], err.message);
           } else {
+            try {
+              const html = getEmailTemplate();
+              await mg
+                .messages()
+                .send({
+                  from: 'WebConf <no-reply@webconf.tech>',
+                  to: address,
+                  subject: 'WebConf • ¡Gracias por suscribirte!',
+                  html
+                });
+            } catch (error) {
+              console.log('ERROR', error.message);
+            }
+
             send(
               res,
               statuses['created'],
               'La suscripción se ha realizado correctamente'
             );
-
-            const html = getEmailTemplate();
-            mg
-              .messages()
-              .send(
-                {
-                  from: 'WebConf <no-reply@webconf.tech>',
-                  to: address,
-                  subject: 'WebConf • ¡Gracias por suscribirte!',
-                  html
-                },
-                (error, { message }) => console.error(error, message)
-              );
           }
         }
       );
