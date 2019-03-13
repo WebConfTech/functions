@@ -40,45 +40,52 @@ const handler = async (req, res) => {
 
   const { address } = await json(req);
 
-  if (address && address.match(emailRegex)) {
-    const mg = mailgun({ apiKey, domain });
-    return mg
-      .lists(listName)
-      .members()
-      .create(
-        {
-          subscribed: true,
-          address
-        },
-        (err, data) => {
-          if (err) {
-            send(res, statuses['bad request'], err.message);
-          } else {
-            try {
-              const html = getEmailTemplate();
-              await mg
-                .messages()
-                .send({
-                  from: 'WebConf <no-reply@webconf.tech>',
-                  to: address,
-                  subject: 'WebConf • ¡Gracias por suscribirte!',
-                  html
-                });
-            } catch (error) {
-              console.log('ERROR', error.message);
-            }
-
-            send(
-              res,
-              statuses['created'],
-              'La suscripción se ha realizado correctamente'
-            );
-          }
-        }
-      );
+  if (!address || !address.match(emailRegex)) {
+    return send(res, statuses['bad request'], 'La dirección de email es inválida');
   }
 
-  return send(res, statuses['bad request'], 'La dirección de email es inválida');
+  const mg = mailgun({ apiKey, domain });
+  let subscribeError;
+  try {
+    await mg.lists(listName).members().create({
+      subscribed: true,
+      address
+    });
+  } catch (error) {
+    subscribeError = error;
+  }
+
+  if (subscribeError) {
+    if (subscribeError.message.match(/already exists/i)) {
+      send(
+        res,
+        statuses['created'],
+        'La suscripción se ha realizado correctamente'
+      );
+    } else {
+      send(res, statuses['bad request'], subscribeError.message);
+    }
+  } else {
+    try {
+      const html = getEmailTemplate();
+      await mg
+        .messages()
+        .send({
+          from: 'WebConf <no-reply@webconf.tech>',
+          to: address,
+          subject: 'WebConf • ¡Gracias por suscribirte!',
+          html
+        });
+    } catch (error) {
+      console.log('Unable to send the welcome email', error);
+    }
+
+    send(
+      res,
+      statuses['created'],
+      'La suscripción se ha realizado correctamente'
+    );
+  }
 };
 
 const cors = microCors({
