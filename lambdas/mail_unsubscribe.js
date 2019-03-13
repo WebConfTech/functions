@@ -23,11 +23,14 @@ module.exports = async (req, res) => {
       });
     }
 
-    const deletion = await mg
+    const { recipient: address } = data['event-data'];
+    await mg
       .lists(listName)
-      .members(data['event-data'].recipient)
+      .members(address)
       .delete();
-
+    await mg
+      .unsubscribes({ address })
+      .delete();
   } catch (error) {
     return send(res, statuses['not acceptable'], {
       message: `Unexpected error: ${error.message}`,
