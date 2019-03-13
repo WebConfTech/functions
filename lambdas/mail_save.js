@@ -41,7 +41,8 @@ const handler = async (req, res) => {
   const { address } = await json(req);
 
   if (address && address.match(emailRegex)) {
-    return mailgun({ apiKey, domain })
+    const mg = mailgun({ apiKey, domain });
+    return mg
       .lists(listName)
       .members()
       .create(
@@ -60,7 +61,7 @@ const handler = async (req, res) => {
             );
 
             const html = getEmailTemplate();
-            mailgun({ domain, apiKey })
+            mg
               .messages()
               .send(
                 {
