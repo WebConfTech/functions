@@ -12,11 +12,19 @@ module.exports = upload(async (req, res) => {
   const { listName, subject, specificAddress, secret } = req.body;
 
   if (!(req.files && req.files.file && req.files.file.mimetype === 'text/html')) {
-    return send(res, statuses['bad request'], JSON.stringify({ error: `Error - On list load No file uploaded or wrong file format` }));
+    return send(
+      res,
+      statuses['bad request'],
+      JSON.stringify({ error: `Error - On list load No file uploaded or wrong file format` })
+    );
   }
 
   if (secret !== secret_key) {
-    return send(res, statuses['bad request'], JSON.stringify({ error: `Error - Wrong secret` }));
+    return send(
+      res,
+      statuses['bad request'],
+      JSON.stringify({ error: `Error - Wrong secret` })
+    );
   }
 
   const messageData = {
@@ -26,9 +34,13 @@ module.exports = upload(async (req, res) => {
     from: 'WebConf <no-reply@webconf.tech>'
   };
 
+  const mg = mailgun({ domain, apiKey });
   if (listName) {
     try {
-      const listMembers = await mailgun({ domain, apiKey }).lists(listName).members().list();
+      const listMembers = await mg
+        .lists(listName)
+        .members()
+        .list();
       const subscribedMembers = listMembers.items.filter(user => user.subscribed);
 
       messageData.to = subscribedMembers.map(user => user.address);
@@ -37,14 +49,29 @@ module.exports = upload(async (req, res) => {
           ({ ...accumulator, [user.address]: user }), {}
       );
     } catch (err) {
-      return send(res, statuses['bad request'], JSON.stringify({ error: `Error - On list load ${err.message}` }));
+      return send(
+        res,
+        statuses['bad request'],
+        JSON.stringify({ error: `Error - On list load ${err.message}` })
+      );
     }
   }
 
   try {
-    const { message } = await mailgun({ domain, apiKey }).messages().send(messageData);
-    return send(res, statuses['ok'], JSON.stringify({ status: message, sentTo: messageData.to }));
+    const { message } = await mg
+      .messages()
+      .send(messageData);
+
+    return send(
+      res,
+      statuses['ok'],
+      JSON.stringify({ status: message, sentTo: messageData.to })
+    );
   } catch (err) {
-    return send(res, statuses['bad request'], JSON.stringify({ error: `Error - On Email send ${err.message}` }))
+    return send(
+      res,
+      statuses['bad request'],
+      JSON.stringify({ error: `Error - On Email send ${err.message}` })
+    );
   }
 });
