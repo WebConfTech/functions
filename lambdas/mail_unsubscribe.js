@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
       .members(address)
       .delete();
     await mg
-      .unsubscribes({ address })
+      .unsubscribes(address)
       .delete();
   } catch (error) {
     return send(res, statuses['not acceptable'], {
