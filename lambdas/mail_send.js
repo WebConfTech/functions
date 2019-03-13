@@ -1,15 +1,12 @@
-if (process.env.NODE_ENV === 'development') {
-  require('dotenv').config();
-}
-
-const domain = process.env.MAILGUN_DOMAIN;
-const apiKey = process.env.MAILGUN_API_KEY;
-const secret_key = process.env.SECRET_SEND_KEY;
-
 const { send } = require('micro');
 const statuses = require('statuses');
 const { upload } = require('micro-upload')
 const mailgun = require('mailgun-js');
+const {
+  MAILGUN_DOMAIN: domain,
+  MAILGUN_API_KEY: apiKey,
+  MAILGUN_SEND_SECRET: secret_key,
+} = require('../env');
 
 module.exports = upload(async (req, res) => {
   const { listName, subject, specificAddress, secret } = req.body;

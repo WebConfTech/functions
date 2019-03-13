@@ -1,18 +1,16 @@
-if (process.env.NODE_ENV === 'development') {
-  require('dotenv').config();
-}
-
-const domain = process.env.MAILGUN_DOMAIN;
-const apiKey = process.env.MAILGUN_API_KEY;
-const listName = process.env.MAILGUN_LIST;
-
+const path = require('path');
+const fs = require('fs');
 const mailgun = require('mailgun-js');
 const statuses = require('statuses');
 const { json, send } = require('micro');
 const microCors = require('micro-cors-multiple-allow-origin');
+const {
+  MAILGUN_DOMAIN: domain,
+  MAILGUN_API_KEY: apiKey,
+  MAILGUN_LIST: listName,
+} = require('../env');
+
 const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
-const path = require('path');
-const fs = require('fs');
 
 let emailTemplate;
 let emailTemplateError = false;
