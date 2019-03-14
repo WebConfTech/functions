@@ -2,7 +2,6 @@
   <mj-head>
     <mj-title>¡Gracias por suscribirte!
     </mj-title>
-    <mj-font name="Bahnschrift" href="../assets/fonts/bahnschrift.ttf"></mj-font>
     <mj-attributes>
       <mj-all font-family="Bahnschrift, Arial, sans-serif" text-align="left"></mj-all>
       <mj-text font-weight="bold" font-size="20px" color="#000" line-height="24px"></mj-text>
