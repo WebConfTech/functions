@@ -31,7 +31,7 @@ module.exports = upload(async (req, res) => {
     subject,
     to: specificAddress,
     html: req.files.file.data.toString('utf8'),
-    from: 'WebConf <no-reply@webconf.tech>'
+    from: 'WebConf <no-reply@mg.webconf.tech>'
   };
 
   const mg = mailgun({ domain, apiKey });

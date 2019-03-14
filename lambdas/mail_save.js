@@ -71,7 +71,7 @@ const handler = async (req, res) => {
       await mg
         .messages()
         .send({
-          from: 'WebConf <no-reply@webconf.tech>',
+          from: 'WebConf <no-reply@mg.webconf.tech>',
           to: address,
           subject: 'WebConf • ¡Gracias por suscribirte!',
           html
