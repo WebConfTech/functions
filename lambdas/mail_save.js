@@ -13,7 +13,10 @@ const {
 const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
 
 let emailTemplate;
+let textTemplate;
 let emailTemplateError = false;
+let textTemplateError = false;
+
 const getEmailTemplate = () => {
   if (emailTemplateError) {
     return;
@@ -31,7 +34,26 @@ const getEmailTemplate = () => {
     }
   }
   return emailTemplate;
+};
+
+const getTextTemplate = () => {
+  if (textTemplateError) {
+    return;
 }
+  if (!textTemplate) {
+    try {
+      textTemplate = fs.readFileSync(
+        path.resolve(__dirname, '../templates/mail_registration.txt'),
+        'utf8'
+      );
+    } catch (error) {
+      textTemplateError = true;
+      console.error(error);
+      return;
+    }
+  }
+  return textTemplate;
+};
 
 const handler = async (req, res) => {
   if (req.method === 'OPTIONS') {
@@ -68,13 +90,12 @@ const handler = async (req, res) => {
   } else {
     try {
       const html = getEmailTemplate();
-      await mg
-        .messages()
-        .send({
+      const text = getTextTemplate();
           from: 'WebConf <no-reply@mg.webconf.tech>',
           to: address,
           subject: 'WebConf • ¡Gracias por suscribirte!',
-          html
+        html,
+        text
         });
     } catch (error) {
       console.log('Unable to send the welcome email', error);

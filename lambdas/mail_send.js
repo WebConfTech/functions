@@ -15,7 +15,17 @@ module.exports = upload(async (req, res) => {
     return send(
       res,
       statuses['bad request'],
-      JSON.stringify({ error: `Error - On list load No file uploaded or wrong file format` })
+      JSON.stringify({ error: `Error - On list load - Missing HTML file` })
+    );
+  }
+
+  if (
+    !(req.files && req.files.textFile && req.files.textFile.mimetype === 'text/plain')
+  ) {
+    return send(
+      res,
+      statuses['bad request'],
+      JSON.stringify({ error: `Error - On list load - Missing text file` })
     );
   }
 
@@ -31,6 +41,7 @@ module.exports = upload(async (req, res) => {
     subject,
     to: specificAddress,
     html: req.files.file.data.toString('utf8'),
+    text: req.files.textFile.data.toString('utf8'),
     from: 'WebConf <no-reply@mg.webconf.tech>'
   };
 
