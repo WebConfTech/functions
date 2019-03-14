@@ -1,11 +1,11 @@
 const { send } = require('micro');
 const statuses = require('statuses');
-const { upload } = require('micro-upload')
+const { upload } = require('micro-upload');
 const mailgun = require('mailgun-js');
 const {
   MAILGUN_DOMAIN: domain,
   MAILGUN_API_KEY: apiKey,
-  MAILGUN_SEND_SECRET: secret_key,
+  MAILGUN_SEND_SECRET: secret_key
 } = require('../env');
 
 module.exports = upload(async (req, res) => {
@@ -56,8 +56,8 @@ module.exports = upload(async (req, res) => {
 
       messageData.to = subscribedMembers.map(user => user.address);
       messageData['recipient-variables'] = subscribedMembers.reduce(
-        (accumulator, user) =>
-          ({ ...accumulator, [user.address]: user }), {}
+        (accumulator, user) => ({ ...accumulator, [user.address]: user }),
+        {}
       );
     } catch (err) {
       return send(
@@ -69,9 +69,7 @@ module.exports = upload(async (req, res) => {
   }
 
   try {
-    const { message } = await mg
-      .messages()
-      .send(messageData);
+    const { message } = await mg.messages().send(messageData);
 
     return send(
       res,

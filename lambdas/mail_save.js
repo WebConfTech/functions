@@ -7,7 +7,7 @@ const microCors = require('micro-cors-multiple-allow-origin');
 const {
   MAILGUN_DOMAIN: domain,
   MAILGUN_API_KEY: apiKey,
-  MAILGUN_LIST: listName,
+  MAILGUN_LIST: listName
 } = require('../env');
 
 const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
@@ -39,7 +39,7 @@ const getEmailTemplate = () => {
 const getTextTemplate = () => {
   if (textTemplateError) {
     return;
-}
+  }
   if (!textTemplate) {
     try {
       textTemplate = fs.readFileSync(
@@ -69,21 +69,20 @@ const handler = async (req, res) => {
   const mg = mailgun({ apiKey, domain });
   let subscribeError;
   try {
-    await mg.lists(listName).members().create({
-      subscribed: true,
-      address
-    });
+    await mg
+      .lists(listName)
+      .members()
+      .create({
+        subscribed: true,
+        address
+      });
   } catch (error) {
     subscribeError = error;
   }
 
   if (subscribeError) {
     if (subscribeError.message.match(/already exists/i)) {
-      send(
-        res,
-        statuses['created'],
-        'La suscripción se ha realizado correctamente'
-      );
+      send(res, statuses['created'], 'La suscripción se ha realizado correctamente');
     } else {
       send(res, statuses['bad request'], subscribeError.message);
     }
@@ -91,21 +90,18 @@ const handler = async (req, res) => {
     try {
       const html = getEmailTemplate();
       const text = getTextTemplate();
-          from: 'WebConf <no-reply@mg.webconf.tech>',
-          to: address,
-          subject: 'WebConf • ¡Gracias por suscribirte!',
+      await mg.messages().send({
+        from: 'WebConf <no-reply@mg.webconf.tech>',
+        to: address,
+        subject: 'WebConf • ¡Gracias por suscribirte!',
         html,
         text
-        });
+      });
     } catch (error) {
       console.log('Unable to send the welcome email', error);
     }
 
-    send(
-      res,
-      statuses['created'],
-      'La suscripción se ha realizado correctamente'
-    );
+    send(res, statuses['created'], 'La suscripción se ha realizado correctamente');
   }
 };
 
