@@ -31,6 +31,8 @@
       <mj-column width="350px">
         <mj-text font-weight="300">
           Próximamente te contactaremos por este medio con más información.
+
+          Mientras tanto...
         </mj-text>
       </mj-column>
     </mj-section>
@@ -62,7 +64,30 @@
     <mj-section>
       <mj-column>
         <mj-text color="#888" font-size="8px" line-height="12px">
-          PROTECCIÓN DE DATOS PERSONALES: EL TITULAR DE LOS DATOS PERSONALES TIENE LA FACULTAD DE EJERCER EL DERECHO DE ACCESO A LOS MISMOS EN FORMA GRATUITA A INTERVALOS NO INFERIORES A SEIS MESES, SALVO QUE SE ACREDITE UN INTERÉS LEGÍTIMO AL EFECTO CONFORME LO ESTABLECIDO EN EL ARTÍCULO 14, INCISO 3 DE LA LEY Nº 25.326. EN VIRTUD DE LO ESTABLECIDO POR LA DISPOSICIÓN NRO. 4 DE LA DIRECCIÓN NACIONAL DE PROTECCIÓN DE DATOS PERSONALES Y DE LOS ARTS. 27, INC. 3 DE LA LEY 25.326 Y 27, PÁRRAFO 3RO. DEL DECRETO 1558/01, REFERIDOS A LAS BASES DE DATOS CON FINES DE PUBLICIDAD, LE INFORMAMOS QUE USTED TIENE DERECHO AL RETIRO O BLOQUEO, TOTAL O PARCIAL, DE SU NOMBRE DE ESTA BASE DE DATOS, LO QUE PODRÁ HACER ENVIANDO SU DECISIÓN EN TAL SENTIDO UTILIZANDO EL LINK "PUEDES DESUSCRIBIRTE CLICKEANDO AQUI" AL PIE DEL PRESENTE. LOS MENCIONADOS ARTÍCULOS EXPRESAN LO SIGUIENTE: LEY 25.326 ART. 27 INCISO 3RO.: EL TITULAR PODRÁ, EN CUALQUIER MOMENTO, SOLICITAR EL RETIRO O BLOQUEO DE SU NOMBRE DE LOS BANCOS DE DATOS A LOS QUE SE REFIERE EL PRESENTE ARTÍCULO - DECRETO 1158/01 ART. 27 PÁRRAFO 3RO.: EN TODA COMUNICACIÓN CON FINES DE PUBLICIDAD QUE SE REALICE POR CORREO, TELÉFONO, CORREO ELECTRÓNICO, INTERNET U OTRO MEDIO A DISTANCIA A CONOCER, SE DEBERÁ INDICAR, EN FORMA EXPRESA Y DESTACADA, LA POSIBILIDAD DEL TITULAR DEL DATO DE SOLICITAR EL RETIRO O BLOQUEO, TOTAL O PARCIAL, DE SU NOMBRE DE LA BASE DE DATOS A PEDIDO DEL INTERESADO, SE DEBERÁ INFORMAR EL NOMBRE DEL RESPONSABLE O USUARIO DEL BANCO DE DATOS QUE PROVEYÓ LA INFORMACIÓN. LA DIRECCIÓN NACIONAL DE PROTECCIÓN DE DATOS PERSONALES, ÓRGANO DE CONTROL DE LA LEY Nº 25.326, TIENE LA ATRIBUCIÓN DE ATENDER LAS DENUNCIAS Y RECLAMOS QUE SE INTERPONGAN CON RELACIÓN AL CUMPLIMIENTO DE LAS NORMAS SOBRE DATOS PERSONALES.
+          PROTECCIÓN DE DATOS PERSONALES: El titular de los datos personales tiene la
+          facultad de ejercer el derecho de acceso a los mismos en forma gratuita a
+          intervalos no inferiores a seis meses, salvo que se acredite un interés
+          legítimo al efecto conforme lo establecido en el Artículo 14, Inciso 3 de la
+          Ley N° 25.326. En virtud de lo establecido por la Disposición Nro. 4 de la
+          Dirección Nacional de Protección de Datos Personales y de los Arts. 27, Inc. 3
+          de la Ley 25.326 y 27, párrafo 3ro. del Decreto 1558/01, referidos a las bases
+          de datos con fines de publicidad, te informamos que tienes el derecho al
+          retiro o bloqueo, total o parcial, de tu nombre de esta base de datos, lo que
+          podrás hacer enviando tu decisión en tal sentido utilizando el link "Puedes
+          desuscribirte clickeando aquí" al pie del presente. Los mencionados artículos
+          expresan lo siguiente: Ley 25.326 Art. 27 Inciso 3ro.: El titular podrá, en
+          cualquier momento, solicitar el retiro o bloqueo de su nombre de los bancos
+          de datos a los que se refiere el presente artículo - Decreto 1158/01 Art. 27
+          Párrafo 3ro.: En toda comunicación con fines de publicidad que se realice por
+          correo, teléfono, correo electrónico, Internet u otro medio a distancia a
+          conocer, se deberá indicar, en forma expresa y destacada, la posibilidad del
+          titular del dato de solicitar el retiro o bloqueo, total o parcial, de su
+          nombre de la base de datos a pedido del interesado, se deberá informar el
+          nombre del responsable o usuario del banco de datos que proveyó la
+          información. La Dirección Nacional de Protección de Datos Personales, órgano
+          de control de la Ley N° 25.326, tiene la atribución de atender las denuncias y
+          reclamos que se interpongan con relación al cumplimiento de las normas sobre
+          datos personales.
         </mj-text>
         <mj-text padding-bottom="25px" font-size="12px" font-weight="bold" line-height="12px">
           <a href="%unsubscribe_url%" style="color: #302C62; text-decoration: none;">Puedes desuscribirte clickeando aquí.</a>
