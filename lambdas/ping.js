@@ -1,6 +1,5 @@
-if (process.env.NODE_ENV === 'development') {
-  require('dotenv').config();
-}
+// To validate possible missing env vars.
+require('../env');
 
 module.exports = (req, res) => {
   res.end(JSON.stringify({ pong: true }));

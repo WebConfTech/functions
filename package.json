@@ -9,18 +9,18 @@
   "scripts": {
     "clean-deploys": "now rm $NOW_NAME --safe --token=$NOW_TOKEN --team=$NOW_TEAM --yes",
     "deploy": "now alias $(now --name=$NOW_NAME -e MAILGUN_API_KEY=$MAILGUN_API_KEY -e MAILGUN_DOMAIN=$MAILGUN_DOMAIN -e MAILGUN_LIST=$MAILGUN_LIST --token=$NOW_TOKEN --team=$NOW_TEAM) $NOW_INSTANCE_NAME --token=$NOW_TOKEN --team=$NOW_TEAM",
-    "dev": "micro-dev -p ${PORT:-4003}",
     "scale": "now scale $NOW_NAME.now.sh sfo 1 --token=$NOW_TOKEN --team=$NOW_TEAM",
     "start": "now-lambda",
     "test": "echo \"Write tests! -> D:\""
   },
   "dependencies": {
-    "dotenv": "^6.2.0",
     "mailgun-js": "^0.22.0",
     "micro": "^9.3.3",
+    "micro-upload": "^1.0.1",
     "micro-cors-multiple-allow-origin": "^1.0.1",
     "mjml": "^4.4.0-beta.1",
-    "statuses": "^1.5.0"
+    "statuses": "^1.5.0",
+    "now-env": "3.1.0"
   },
   "devDependencies": {
     "husky": "^1.3.1",

@@ -1,11 +1,41 @@
 {
   "version": 2,
   "name": "functions",
-  "alias": ["api.webconf.tech"],
-  "builds": [{ "src": "lambdas/*.js", "use": "@now/node" }],
+  "alias": [
+    "api.webconf.tech"
+  ],
+  "builds": [
+    {
+      "src": "lambdas/*.js",
+      "use": "@now/node"
+    }
+  ],
   "routes": [
-    { "src": "/lambdas/mail_save", "dest": "/lambdas/mail_save.js" },
-    { "src": "/lambdas/mail_send", "dest": "/lambdas/mail_send.js" },
-    { "src": "/ping", "dest": "/lambdas/ping.js" }
-  ]
+    {
+      "src": "/lambdas/mail_save",
+      "dest": "/lambdas/mail_save.js"
+    },
+    {
+      "src": "/lambdas/mail_send",
+      "dest": "/lambdas/mail_send.js"
+    },
+    {
+      "src": "/lambdas/mail_unsubscribe",
+      "dest": "/lambdas/mail_unsubscribe.js"
+    },
+    {
+      "src": "/ping",
+      "dest": "/lambdas/ping.js"
+    }
+  ],
+  "env": {
+    "MAILGUN_API_KEY": "@production-functions-mailgun-api-key",
+    "MAILGUN_DOMAIN": "@production-functions-mailgun-domain",
+    "MAILGUN_LIST": "@production-functions-mailgun-list",
+    "MAILGUN_SEND_SECRET": "@production-functions-send-secret",
+    "STAGING_MAILGUN_API_KEY": "@staging-functions-mailgun-api-key",
+    "STAGING_MAILGUN_DOMAIN": "@staging-functions-mailgun-domain",
+    "STAGING_MAILGUN_LIST": "@staging-functions-mailgun-list",
+    "STAGING_MAILGUN_SEND_SECRET": "@staging-functions-send-secret"
+  }
 }
