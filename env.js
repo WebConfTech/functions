@@ -10,28 +10,26 @@ const requiredKeys = [
   'MAILGUN_DOMAIN',
   'MAILGUN_LIST',
   'MAILGUN_SEND_SECRET',
+  'HOST'
 ];
 
 let envVars = {};
 if (
   !development &&
-  (
-    process.env.NOW_GITHUB_COMMIT_REF === 'master' ||
-    !process.env.NOW_GITHUB_COMMIT_REF
-  )
+  (process.env.NOW_GITHUB_COMMIT_REF === 'master' || !process.env.NOW_GITHUB_COMMIT_REF)
 ) {
   envVars = requiredKeys.reduce((acc, key) => ({ ...acc, [key]: process.env[key] }), {});
 } else {
   envVars = requiredKeys.reduce(
     (acc, key) => ({
       ...acc,
-      [key]: process.env[`${stagingPrefix}${key}`] || process.env[key],
+      [key]: process.env[`${stagingPrefix}${key}`] || process.env[key]
     }),
     {}
   );
 }
 
-const missing = Object.keys(envVars).find((key) => envVars[key] === undefined);
+const missing = Object.keys(envVars).find(key => envVars[key] === undefined);
 if (missing) {
   console.warn(`Warning! The following environment variable is missing: ${missing}`);
 }

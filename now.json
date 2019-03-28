@@ -1,13 +1,19 @@
 {
   "version": 2,
   "name": "functions",
-  "alias": [
-    "api.webconf.tech"
-  ],
+  "alias": ["api.webconf.tech"],
   "builds": [
     {
       "src": "lambdas/*.js",
       "use": "@now/node"
+    },
+    {
+      "src": "templates/*.html",
+      "use": "@now/static"
+    },
+    {
+      "src": "templates/*.txt",
+      "use": "@now/static"
     }
   ],
   "routes": [
@@ -29,10 +35,12 @@
     }
   ],
   "env": {
+    "HOST": "https://api.webconf.tech",
     "MAILGUN_API_KEY": "@production-functions-mailgun-api-key",
     "MAILGUN_DOMAIN": "@production-functions-mailgun-domain",
     "MAILGUN_LIST": "@production-functions-mailgun-list",
     "MAILGUN_SEND_SECRET": "@production-functions-send-secret",
+    "STAGING_HOST": "https://api.webconf.tech",
     "STAGING_MAILGUN_API_KEY": "@staging-functions-mailgun-api-key",
     "STAGING_MAILGUN_DOMAIN": "@staging-functions-mailgun-domain",
     "STAGING_MAILGUN_LIST": "@staging-functions-mailgun-list",
