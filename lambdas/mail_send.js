@@ -4,6 +4,7 @@ const { upload } = require('micro-upload');
 const mailgun = require('mailgun-js');
 const { readFileSync } = require('fs');
 const path = require('path');
+const fetch = require('node-fetch');
 
 const {
   MAILGUN_DOMAIN: domain,
@@ -72,14 +73,10 @@ module.exports = upload(async (req, res) => {
   }
 
   const html = templateName
-    ? readFileSync(path.resolve(__dirname, `../templates/${templateName}.html`)).toString(
-        'utf8'
-      )
+    ? await (await fetch(`https://${req.host}/templates/${templateName}.html`)).text()
     : req.files.file.data.toString('utf8');
   const text = templateName
-    ? readFileSync(path.resolve(__dirname, `../templates/${templateName}.txt`)).toString(
-        'utf8'
-      )
+    ? await (await fetch(`https://${req.host}/templates/${templateName}.txt`)).text()
     : req.files.textFile.data.toString('utf8');
 
   const jsonTemplateParameters = JSON.parse(templateParameters);
