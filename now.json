@@ -6,9 +6,16 @@
     {
       "src": "lambdas/*.js",
       "use": "@now/node"
+    },
+    {
+      "src": "templates/*.html",
+      "use": "@now/static"
+    },
+    {
+      "src": "templates/*.txt",
+      "use": "@now/static"
     }
   ],
-  "files": ["templates/"],
   "routes": [
     {
       "src": "/lambdas/mail_save",
