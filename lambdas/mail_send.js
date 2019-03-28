@@ -73,14 +73,10 @@ module.exports = upload(async (req, res) => {
   }
 
   const html = templateName
-    ? await (await fetch(
-        `https://${process.env.HOST}/templates/${templateName}.html`
-      )).text()
+    ? await (await fetch(`${process.env.HOST}/templates/${templateName}.html`)).text()
     : req.files.file.data.toString('utf8');
   const text = templateName
-    ? await (await fetch(
-        `https://${process.env.HOST}/templates/${templateName}.txt`
-      )).text()
+    ? await (await fetch(`${process.env.HOST}/templates/${templateName}.txt`)).text()
     : req.files.textFile.data.toString('utf8');
 
   const jsonTemplateParameters = JSON.parse(templateParameters);
