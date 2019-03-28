@@ -1,15 +1,14 @@
 {
   "version": 2,
   "name": "functions",
-  "alias": [
-    "api.webconf.tech"
-  ],
+  "alias": ["api.webconf.tech"],
   "builds": [
     {
       "src": "lambdas/*.js",
       "use": "@now/node"
     }
   ],
+  "files": ["templates/*.html", "templates/*.txt"],
   "routes": [
     {
       "src": "/lambdas/mail_save",

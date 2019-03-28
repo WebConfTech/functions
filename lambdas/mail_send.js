@@ -2,33 +2,67 @@ const { send } = require('micro');
 const statuses = require('statuses');
 const { upload } = require('micro-upload');
 const mailgun = require('mailgun-js');
+const { readFileSync } = require('fs');
+const path = require('path');
+
 const {
   MAILGUN_DOMAIN: domain,
   MAILGUN_API_KEY: apiKey,
   MAILGUN_SEND_SECRET: secret_key
 } = require('../env');
 
-module.exports = upload(async (req, res) => {
-  const { listName, subject, specificAddress, secret } = req.body;
+const applyParameters = (params, target) =>
+  Object.keys(params).reduce(
+    (template, parameter) =>
+      template.replace(
+        new RegExp(`%${parameter.toLowerCase()}%`, 'g'),
+        params[parameter]
+      ),
+    target
+  );
 
-  if (!(req.files && req.files.file && req.files.file.mimetype === 'text/html')) {
-    return send(
-      res,
-      statuses['bad request'],
-      JSON.stringify({ error: `Error - On list load - Missing HTML file` })
-    );
+module.exports = upload(async (req, res) => {
+  const {
+    listName,
+    subject,
+    specificAddress,
+    secret,
+    templateName,
+    templateParameters
+  } = req.body;
+
+  if (!templateName) {
+    if (!(req.files && req.files.file && req.files.file.mimetype === 'text/html')) {
+      return send(
+        res,
+        statuses['bad request'],
+        JSON.stringify({ error: `Error - Missing HTML file` })
+      );
+    }
+
+    if (
+      !(req.files && req.files.textFile && req.files.textFile.mimetype === 'text/plain')
+    ) {
+      return send(
+        res,
+        statuses['bad request'],
+        JSON.stringify({ error: `Error - Missing text file` })
+      );
+    }
   }
 
   if (
-    !(req.files && req.files.textFile && req.files.textFile.mimetype === 'text/plain')
+    !(
+      templateName &&
+      !(req.files && req.files.textFile && req.files.textFile.mimetype === 'text/plain')
+    )
   ) {
     return send(
       res,
       statuses['bad request'],
-      JSON.stringify({ error: `Error - On list load - Missing text file` })
+      JSON.stringify({ error: `Error - Missing template` })
     );
   }
-
   if (secret !== secret_key) {
     return send(
       res,
@@ -37,13 +71,31 @@ module.exports = upload(async (req, res) => {
     );
   }
 
+  const html = templateName
+    ? readFileSync(path.resolve(__dirname, `../templates/${templateName}.html`)).toString(
+        'utf8'
+      )
+    : req.files.file.data.toString('utf8');
+  const text = templateName
+    ? readFileSync(path.resolve(__dirname, `../templates/${templateName}.txt`)).toString(
+        'utf8'
+      )
+    : req.files.textFile.data.toString('utf8');
+
+  const jsonTemplateParameters = JSON.parse(templateParameters);
+
+  const htmlWithParameters = applyParameters(jsonTemplateParameters, html);
+  const textWithParameters = applyParameters(jsonTemplateParameters, text);
+
+  const mg = mailgun({ domain, apiKey });
+
   const messageData = {
     subject,
     to: specificAddress,
-    html: req.files.file.data.toString('utf8'),
-    text: req.files.textFile.data.toString('utf8'),
+    html: htmlWithParameters,
+    text: textWithParameters,
     from: 'WebConf <no-reply@mg.webconf.tech>',
-    attachments: Object.keys(req.files)
+    attachment: Object.keys(req.files || {})
       // Exclude e-mail templates
       .filter(fileKey => !['file', 'textFile'].includes(fileKey))
       // Arraify the file list
@@ -52,15 +104,14 @@ module.exports = upload(async (req, res) => {
       .map(
         file =>
           new mg.Attachment({
-            contentType: file.mimeType,
+            contentType: file.mimetype,
             filename: file.name,
             data: file.data,
-            knownLength: file.size
+            knownLength: file.size || file.data.length
           })
       )
   };
 
-  const mg = mailgun({ domain, apiKey });
   if (listName) {
     try {
       const listMembers = await mg

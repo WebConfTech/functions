@@ -11,7 +11,7 @@
   <mj-body background-color="#ffffff">
     <mj-section padding-left="30px" padding-top="25px">
       <mj-column width="130px" padding="0px">
-        <mj-image src="https://i.imgur.com/hawynzh.png" padding="0px" alt="Córdoba WebConf 2019" href="https://webconf.tech" />
+        <mj-image align="left" src="https://i.imgur.com/hawynzh.png" padding="0px" alt="Córdoba WebConf 2019" href="https://webconf.tech" />
       </mj-column>
     </mj-section>
     <mj-section padding-top="20px">
@@ -30,7 +30,7 @@
     </mj-section>
     <mj-section padding-top="35px" padding-bottom="35px">
       <mj-column width="150px">
-        <mj-image padding-top="0px" padding-right="0px" padding-bottom="0px" src="%checkout_url%/e-ticket?id=fda91a39-98c4-479a-9df6-92c1957799cb&amp;format=qr" alt="" />
+        <mj-image align="left" padding-top="0px" padding-right="0px" padding-bottom="0px" src="%checkout_url%/e-ticket?id=%ticket_id%&amp;format=qr" alt="" />
       </mj-column>
       <mj-column width="350px" padding-left="0px" padding-top="0px">
         <mj-text padding-top="0px" padding-bottom="0px">
@@ -55,7 +55,7 @@
         <mj-text font-size="16px" padding-top="0px" padding-bottom="0px" color="#A0175A" line-height="19px" font-weight="300">
           Guardá un recordatorio en tu calendario.
         </mj-text>
-        <mj-button padding-left="0px" padding-bottom="35px" border-radius="10px" background-color="#A0175A" color="#FFFFFF" href="%checkout_url%/e-ticket?id=%ticket_id%&amp;format=ical">
+        <mj-button align="left" padding-bottom="35px" border-radius="10px" background-color="#A0175A" color="#FFFFFF" href="%checkout_url%/e-ticket?id=%ticket_id%&amp;format=ical">
           Agregar "WebConf 2019" a tu calendario
         </mj-button>
       </mj-column>
@@ -95,26 +95,17 @@
       <script type="application/ld+json">
         {
           "@context": "http://schema.org",
-          "@type": "Reservation",
-          "reservationId": "%purchase_id%",
-          "reservationStatus": "ReservationConfirmed",
-          "reservedTicket": {
-            "@type": "Ticket",
-            "dateIssued": "%ticket_date",
-            "issuedBy": {
-              "@type": "Organization",
-              "name": "WebConf"
-            },
-            "underName": {
-              "@type": "Person",
-              "name": "%ticket_owner_name%",
-              "taxID": "%ticket_owner_identification_number%"
-            }
+          "@type": "EventReservation",
+          "reservationNumber": "%purchase_id%",
+          "reservationStatus": "http://schema.org/Confirmed",
+          "underName": {
+            "@type": "Person",
+            "name": "%ticket_owner_name%"
           },
           "reservationFor": {
             "@type": "Event",
+            "name": "Córdoba WebConf 2019",
             "startDate": "2019-05-11T09:00:00-03:00",
-            "endDate": "2019-05-11T18:00:00-03:00",
             "location": {
               "@type": "Place",
               "name": "Auditorio Diego de Torres (UCC)",
@@ -127,11 +118,10 @@
                 "addressCountry": "AR"
               }
             }
-          }
-          "priceCurrency": "ARS",
-          "totalPrice": "%ticket_price%",
+          },
           "ticketNumber": "%ticket_id%",
-          "ticketToken": "%checkout_url%/e-ticket?id=fda91a39-98c4-479a-9df6-92c1957799cb&amp;format=qr"
+          "ticketToken": "%checkout_url%/e-ticket?id=fda91a39-98c4-479a-9df6-92c1957799cb&amp;format=qr",
+          "numSeats": 1
         }
       </script>
     </mj-raw>
