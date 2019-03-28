@@ -42,7 +42,22 @@ module.exports = upload(async (req, res) => {
     to: specificAddress,
     html: req.files.file.data.toString('utf8'),
     text: req.files.textFile.data.toString('utf8'),
-    from: 'WebConf <no-reply@mg.webconf.tech>'
+    from: 'WebConf <no-reply@mg.webconf.tech>',
+    attachments: Object.keys(req.files)
+      // Exclude e-mail templates
+      .filter(fileKey => !['file', 'textFile'].includes(fileKey))
+      // Arraify the file list
+      .map(fileKey => req.files[fileKey])
+      // Convert each file to a Mailgun Attachment
+      .map(
+        file =>
+          new mg.Attachment({
+            contentType: file.mimeType,
+            filename: file.name,
+            data: file.data,
+            knownLength: file.size
+          })
+      )
   };
 
   const mg = mailgun({ domain, apiKey });
