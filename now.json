@@ -8,7 +8,7 @@
       "use": "@now/node"
     }
   ],
-  "files": ["templates/*.html", "templates/*.txt"],
+  "files": ["templates/"],
   "routes": [
     {
       "src": "/lambdas/mail_save",
