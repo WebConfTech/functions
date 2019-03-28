@@ -1,0 +1,129 @@
+<mjml lang="es">
+  <mj-head>
+    <mj-title>Aquí está tu entrada :)</mj-title>
+    <mj-attributes>
+      <mj-all font-family="Bahnschrift, Arial, sans-serif" text-align="left" />
+      <mj-text font-weight="bold" font-size="20px" color="#000" line-height="24px" />
+      <mj-section padding="0px" />
+      <mj-column width="370px" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="#ffffff">
+    <mj-section padding-left="30px" padding-top="25px">
+      <mj-column width="130px" padding="0px">
+        <mj-image align="left" src="https://i.imgur.com/hawynzh.png" padding="0px" alt="Córdoba WebConf 2019" href="https://webconf.tech" />
+      </mj-column>
+    </mj-section>
+    <mj-section padding-top="20px">
+      <mj-column width="100%">
+        <mj-text color="#302C62">
+          Aquí está tu entrada :)
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-top="10px">
+      <mj-column>
+        <mj-text font-weight="300">
+          Llevá en tu celu o en una copia impresa de este e-mail tu código QR.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-top="35px" padding-bottom="35px">
+      <mj-column width="150px">
+        <mj-image align="left" padding-top="0px" padding-right="0px" padding-bottom="0px" src="%checkout_url%/e-ticket?id=%ticket_id%&amp;format=qr" alt="" />
+      </mj-column>
+      <mj-column width="350px" padding-left="0px" padding-top="0px">
+        <mj-text padding-top="0px" padding-bottom="0px">
+          %ticket_owner_name%
+        </mj-text>
+        <mj-text padding-top="0px" font-weight="300">
+          %ticket_owner_identification_type% %ticket_owner_identification_number%
+        </mj-text>
+        <mj-text padding-top="10px" padding-bottom="0px" font-weight="300" font-size="16px" line-height="19px">
+          Auditorio Diego de Torres (UCC)
+        </mj-text>
+        <mj-text padding-top="0px" font-weight="300" font-size="16px" line-height="19px">
+          Obispo Trejo 323 - 11/05/2019
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column width="350px">
+        <mj-text font-size="16px" padding-bottom="5px" color="#000000" line-height="19px">
+          ¡No te vayas a olvidar!
+        </mj-text>
+        <mj-text font-size="16px" padding-top="0px" padding-bottom="0px" color="#A0175A" line-height="19px" font-weight="300">
+          Guardá un recordatorio en tu calendario.
+        </mj-text>
+        <mj-button align="left" padding-bottom="35px" border-radius="10px" background-color="#A0175A" color="#FFFFFF" href="%checkout_url%/e-ticket?id=%ticket_id%&amp;format=ical">
+          Agregar "WebConf 2019" a tu calendario
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-bottom="5px">
+      <mj-column width="350px">
+        <mj-divider border-width="10px" border-color="#302C62" />
+      </mj-column>
+    </mj-section>
+    <mj-section padding="0px">
+      <mj-column>
+        <mj-text>
+          ¡Nos vemos en la conferencia!
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-top="5px">
+      <mj-column width="350px">
+        <mj-divider border-width="10px" border-color="#302C62" />
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column width="100%">
+        <mj-text color="#888" font-size="8px" line-height="12px">
+          Estás recibiendo este correo porque esta entrada está a tu nombre y vos mismo
+          o alguien más realizó una compra en el sitio oficial de Córdoba WebConf 2019
+          (https://webconf.tech). Si no realizaste ninguna compra o no sabés cómo
+          recibiste esta entrada, comunicate con nosotros a hola@webconf.tech
+          cuanto antes para analizar el caso.
+        </mj-text>
+        <mj-text padding-top="20px" color="#888" font-size="6px" line-height="12px">
+          E-TICKET ID: %ticket_id%
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-raw>
+      <script type="application/ld+json">
+        {
+          "@context": "http://schema.org",
+          "@type": "EventReservation",
+          "reservationNumber": "%purchase_id%",
+          "reservationStatus": "http://schema.org/Confirmed",
+          "underName": {
+            "@type": "Person",
+            "name": "%ticket_owner_name%"
+          },
+          "reservationFor": {
+            "@type": "Event",
+            "name": "Córdoba WebConf 2019",
+            "startDate": "2019-05-11T09:00:00-03:00",
+            "location": {
+              "@type": "Place",
+              "name": "Auditorio Diego de Torres (UCC)",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Obispo Trejo 323",
+                "postalCode": "5000",
+                "addressLocality": "Córdoba",
+                "addressRegion": "Córdoba",
+                "addressCountry": "AR"
+              }
+            }
+          },
+          "ticketNumber": "%ticket_id%",
+          "ticketToken": "%checkout_url%/e-ticket?id=fda91a39-98c4-479a-9df6-92c1957799cb&amp;format=qr",
+          "numSeats": 1
+        }
+      </script>
+    </mj-raw>
+  </mj-body>
+</mjml>

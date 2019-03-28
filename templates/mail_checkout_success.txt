@@ -1,0 +1,37 @@
+===============================================================================
+CÓRDOBA WEBCONF 2019
+Entradas para la conferencia
+===============================================================================
+
+AQUÍ ESTÁ TU ENTRADA :)
+
+Adjunto a este correo encontrarás tu código QR para poder ingresar
+a la conferencia. Puedes guardarlo en tu dispositivo móvil.
+
+También podés utilizar la versión imprimible de esta entrada,
+usando la siguiente URL:
+
+    %checkout_url%/e-ticket?id=%ticket_id%&format=qr,owner
+
+En este correo también incluimos una entrada de iCal para que puedas
+importar un recordatorio a tu calendario. Podés utilizar también este
+enlace para descargarlo:
+
+    %checkout_url%/e-ticket?id=%ticket_id%&format=ical
+
+¡No te vayas a olvidar! Te esperamos el 11 de mayo, en el Auditorio
+Diego de Torres de la UCC, situado en Obispo Trejo 323.
+
+¡Nos vemos en la conferencia!
+
+===============================================================================
+
+Estás recibiendo este correo porque esta entrada está a tu nombre y vos mismo
+o alguien más realizó una compra en el sitio oficial de Córdoba WebConf 2019
+(https://webconf.tech). Si no realizaste ninguna compra o no sabés cómo
+recibiste esta entrada, comunicate con nosotros a hola@webconf.tech
+cuanto antes para analizar el caso.
+
+===============================================================================
+
+E-TICKET ID: %ticket_id%
