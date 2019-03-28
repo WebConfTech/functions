@@ -91,5 +91,49 @@
         </mj-text>
       </mj-column>
     </mj-section>
+    <mj-raw>
+      <script type="application/ld+json">
+        {
+          "@context": "http://schema.org",
+          "@type": "Reservation",
+          "reservationId": "%purchase_id%",
+          "reservationStatus": "ReservationConfirmed",
+          "reservedTicket": {
+            "@type": "Ticket",
+            "dateIssued": "%ticket_date",
+            "issuedBy": {
+              "@type": "Organization",
+              "name": "WebConf"
+            },
+            "underName": {
+              "@type": "Person",
+              "name": "%ticket_owner_name%",
+              "taxID": "%ticket_owner_identification_number%"
+            }
+          },
+          "reservationFor": {
+            "@type": "Event",
+            "startDate": "2019-05-11T09:00:00-03:00",
+            "endDate": "2019-05-11T18:00:00-03:00",
+            "location": {
+              "@type": "Place",
+              "name": "Auditorio Diego de Torres (UCC)",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Obispo Trejo 323",
+                "postalCode": "5000",
+                "addressLocality": "Córdoba",
+                "addressRegion": "Córdoba",
+                "addressCountry": "AR"
+              }
+            }
+          }
+          "priceCurrency": "ARS",
+          "totalPrice": "%ticket_price%",
+          "ticketNumber": "%ticket_id%",
+          "ticketToken": "%checkout_url%/e-ticket?id=fda91a39-98c4-479a-9df6-92c1957799cb&amp;format=qr"
+        }
+      </script>
+    </mj-raw>
   </mj-body>
 </mjml>

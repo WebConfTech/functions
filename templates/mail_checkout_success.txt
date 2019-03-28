@@ -14,7 +14,10 @@ usando la siguiente URL:
     %checkout_url%/e-ticket?id=%ticket_id%&format=qr,owner
 
 En este correo también incluimos una entrada de iCal para que puedas
-importar un recordatorio a tu calendario.
+importar un recordatorio a tu calendario. Podés utilizar también este
+enlace para descargarlo:
+
+    %checkout_url%/e-ticket?id=%ticket_id%&format=ical
 
 ¡No te vayas a olvidar! Te esperamos el 11 de mayo, en el Auditorio
 Diego de Torres de la UCC, situado en Obispo Trejo 323.
