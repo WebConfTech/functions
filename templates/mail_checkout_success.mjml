@@ -11,7 +11,7 @@
   <mj-body background-color="#ffffff">
     <mj-section padding-left="30px" padding-top="25px">
       <mj-column width="130px" padding="0px">
-        <mj-image align="left" src="https://i.imgur.com/hawynzh.png" padding="0px" alt="Córdoba WebConf 2019" href="https://webconf.tech" />
+        <mj-image align="left" src="https://i.imgur.com/hshlHcC.png" padding="0px" alt="Córdoba WebConf 2019" href="https://webconf.tech" />
       </mj-column>
     </mj-section>
     <mj-section padding-top="20px">

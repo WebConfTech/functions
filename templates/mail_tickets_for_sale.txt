@@ -3,18 +3,19 @@ CÓRDOBA WEBCONF 2019
 Newsletter
 ===============================================================================
 
-¡Gracias por suscribirte!
+¡Hpla! ¡Tenemos muy buenas noticias!
 
-Próximamente te contactaremos por este medio con más información.
+Ya están a la venta las entradas de la conferencia.
 
-Mientras tanto, te invitamos a seguirnos en nuestras redes sociales:
+Aceptamos tarjetas de crédito y débito a través de Mercado Pago.
 
-    Facebook:   https://facebook.com/WebConfCBA
-    Twitter:    https://twitter.com/WebConfCBA
-    Instagram:  https://instagram.com/WebConfCBA
+Podés consultar las promociones en cuotas ingresando a esta dirección:
 
-También podés mantenerte informado acerca de la conferencia
-en nuestra página web, https://webconf.tech. 
+    https://www.mercadopago.com.ar/cuotas
+
+Ingresa a nuestra página web, https://webconf.tech, y comprá tu entrada :)
+
+¡Esperamos verte en la conferencia!
 
 ===============================================================================
 
@@ -28,7 +29,7 @@ de la Ley 25.326 y 27, párrafo 3ro. del Decreto 1558/01, referidos a las bases
 de datos con fines de publicidad, te informamos que tienes el derecho al
 retiro o bloqueo, total o parcial, de tu nombre de esta base de datos, lo que
 podrás hacer enviando tu decisión en tal sentido utilizando el link "Puedes
-desuscribirte con esta dirección" al pie del presente. Los mencionados artículos
+desuscribirte utilizando esta dirección" al pie del presente. Los mencionados artículos
 expresan lo siguiente: Ley 25.326 Art. 27 Inciso 3ro.: El titular podrá, en
 cualquier momento, solicitar el retiro o bloqueo de su nombre de los bancos
 de datos a los que se refiere el presente artículo - Decreto 1158/01 Art. 27
@@ -43,5 +44,5 @@ de control de la Ley N° 25.326, tiene la atribución de atender las denuncias y
 reclamos que se interpongan con relación al cumplimiento de las normas sobre
 datos personales.
 
-Puedes desuscribirte con esta dirección:
+Puedes desuscribirte utilizando esta dirección:
 %unsubscribe_url%
