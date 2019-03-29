@@ -79,7 +79,7 @@ module.exports = upload(async (req, res) => {
     ? await (await fetch(`${process.env.HOST}/templates/${templateName}.txt`)).text()
     : req.files.textFile.data.toString('utf8');
 
-  const jsonTemplateParameters = JSON.parse(templateParameters);
+  const jsonTemplateParameters = JSON.parse(templateParameters || '{}');
 
   const htmlWithParameters = applyParameters(jsonTemplateParameters, html);
   const textWithParameters = applyParameters(jsonTemplateParameters, text);
