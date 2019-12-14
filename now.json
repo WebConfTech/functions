@@ -31,7 +31,7 @@
     },
     {
       "src": "/cfp/search",
-      "dest": "/lambdas/cfp/search.js"
+      "dest": "/lambdas/cfp_search.js"
     },
     {
       "src": "/ping",
