@@ -61,3 +61,6 @@ typings/
 
 # Now secrets
 now-secrets.json
+
+# Environment file
+.env*

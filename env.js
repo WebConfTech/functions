@@ -1,7 +1,6 @@
 let development;
 if (process.env.NODE_ENV !== 'production') {
   development = true;
-  require('now-env');
 }
 
 const stagingPrefix = 'STAGING_';
