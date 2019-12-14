@@ -30,6 +30,10 @@
       "dest": "/lambdas/mail_unsubscribe.js"
     },
     {
+      "src": "/cfp/search",
+      "dest": "/lambdas/cfp/search.js"
+    },
+    {
       "src": "/ping",
       "dest": "/lambdas/ping.js"
     }
@@ -44,6 +48,10 @@
     "STAGING_MAILGUN_API_KEY": "@staging-functions-mailgun-api-key",
     "STAGING_MAILGUN_DOMAIN": "@staging-functions-mailgun-domain",
     "STAGING_MAILGUN_LIST": "@staging-functions-mailgun-list",
-    "STAGING_MAILGUN_SEND_SECRET": "@staging-functions-send-secret"
+    "STAGING_MAILGUN_SEND_SECRET": "@staging-functions-send-secret",
+    "TWITTER_CONSUMER_KEY": "@production-functions-twitter-consumer-key",
+    "TWITTER_CONSUMER_SECRET": "@production-functions-twitter-consumer-secret",
+    "TWITTER_ACCESS_TOKEN": "@production-functions-twitter-access-token",
+    "TWITTER_ACCESS_TOKEN_SECRET": "@production-functions-twitter-access-token-secret"
   }
 }
