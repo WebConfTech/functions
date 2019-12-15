@@ -23,22 +23,23 @@ const requiredKeys = [
 
 let envVars = {};
 if (
-  !development &&
-  (process.env.NOW_GITHUB_COMMIT_REF === 'master' || !process.env.NOW_GITHUB_COMMIT_REF)
+  !development
+  && (process.env.NOW_GITHUB_COMMIT_REF === 'master' || !process.env.NOW_GITHUB_COMMIT_REF)
 ) {
   envVars = requiredKeys.reduce((acc, key) => ({ ...acc, [key]: process.env[key] }), {});
 } else {
   envVars = requiredKeys.reduce(
     (acc, key) => ({
       ...acc,
-      [key]: process.env[`${stagingPrefix}${key}`] || process.env[key]
+      [key]: process.env[`${stagingPrefix}${key}`] || process.env[key],
     }),
-    {}
+    {},
   );
 }
 
-const missing = Object.keys(envVars).find(key => envVars[key] === undefined);
+const missing = Object.keys(envVars).find((key) => envVars[key] === undefined);
 if (missing) {
+  // eslint-disable-next-line no-console
   console.warn(`Warning! The following environment variable is missing: ${missing}`);
 }
 

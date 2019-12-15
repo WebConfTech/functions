@@ -11,7 +11,8 @@
     "deploy": "now alias $(now --name=$NOW_NAME -e MAILGUN_API_KEY=$MAILGUN_API_KEY -e MAILGUN_DOMAIN=$MAILGUN_DOMAIN -e MAILGUN_LIST=$MAILGUN_LIST --token=$NOW_TOKEN --team=$NOW_TEAM) $NOW_INSTANCE_NAME --token=$NOW_TOKEN --team=$NOW_TEAM",
     "scale": "now scale $NOW_NAME.now.sh sfo 1 --token=$NOW_TOKEN --team=$NOW_TEAM",
     "start": "now dev",
-    "test": "echo \"Write tests! -> D:\""
+    "test": "echo \"Write tests! -> D:\"",
+    "lint": "eslint ./ --ext .js"
   },
   "dependencies": {
     "firebase-admin": "^8.8.0",
@@ -27,6 +28,10 @@
   "devDependencies": {
     "husky": "^3.1.0",
     "micro-dev": "^3.0.0",
-    "now": "^16.6.3"
+    "now": "^16.6.3",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-node": "^10.0.0"
   }
 }

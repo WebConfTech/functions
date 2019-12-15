@@ -2,25 +2,21 @@ const { send } = require('micro');
 const statuses = require('statuses');
 const { upload } = require('micro-upload');
 const mailgun = require('mailgun-js');
-const { readFileSync } = require('fs');
-const path = require('path');
 const fetch = require('node-fetch');
 
 const {
   MAILGUN_DOMAIN: domain,
   MAILGUN_API_KEY: apiKey,
-  MAILGUN_SEND_SECRET: secret_key
+  MAILGUN_SEND_SECRET: secretKey,
 } = require('../env');
 
-const applyParameters = (params, target) =>
-  Object.keys(params).reduce(
-    (template, parameter) =>
-      template.replace(
-        new RegExp(`%${parameter.toLowerCase()}%`, 'g'),
-        params[parameter]
-      ),
-    target
-  );
+const applyParameters = (params, target) => Object.keys(params).reduce(
+  (template, parameter) => template.replace(
+    new RegExp(`%${parameter.toLowerCase()}%`, 'g'),
+    params[parameter],
+  ),
+  target,
+);
 
 module.exports = upload(async (req, res) => {
   const {
@@ -29,7 +25,7 @@ module.exports = upload(async (req, res) => {
     specificAddress,
     secret,
     templateName,
-    templateParameters
+    templateParameters,
   } = req.body;
 
   if (!templateName) {
@@ -37,7 +33,7 @@ module.exports = upload(async (req, res) => {
       return send(
         res,
         statuses['bad request'],
-        JSON.stringify({ error: `Error - Missing HTML file` })
+        JSON.stringify({ error: 'Error - Missing HTML file' }),
       );
     }
 
@@ -47,28 +43,28 @@ module.exports = upload(async (req, res) => {
       return send(
         res,
         statuses['bad request'],
-        JSON.stringify({ error: `Error - Missing text file` })
+        JSON.stringify({ error: 'Error - Missing text file' }),
       );
     }
   }
 
   if (
     !(
-      templateName &&
-      !(req.files && req.files.textFile && req.files.textFile.mimetype === 'text/plain')
+      templateName
+      && !(req.files && req.files.textFile && req.files.textFile.mimetype === 'text/plain')
     )
   ) {
     return send(
       res,
       statuses['bad request'],
-      JSON.stringify({ error: `Error - Missing template` })
+      JSON.stringify({ error: 'Error - Missing template' }),
     );
   }
-  if (secret !== secret_key) {
+  if (secret !== secretKey) {
     return send(
       res,
       statuses['bad request'],
-      JSON.stringify({ error: `Error - Wrong secret` })
+      JSON.stringify({ error: 'Error - Wrong secret' }),
     );
   }
 
@@ -94,19 +90,16 @@ module.exports = upload(async (req, res) => {
     from: 'WebConf <no-reply@mg.webconf.tech>',
     attachment: Object.keys(req.files || {})
       // Exclude e-mail templates
-      .filter(fileKey => !['file', 'textFile'].includes(fileKey))
+      .filter((fileKey) => !['file', 'textFile'].includes(fileKey))
       // Arraify the file list
-      .map(fileKey => req.files[fileKey])
+      .map((fileKey) => req.files[fileKey])
       // Convert each file to a Mailgun Attachment
-      .map(
-        file =>
-          new mg.Attachment({
-            contentType: file.mimetype,
-            filename: file.name,
-            data: file.data,
-            knownLength: file.size || file.data.length
-          })
-      )
+      .map((file) => new mg.Attachment({
+        contentType: file.mimetype,
+        filename: file.name,
+        data: file.data,
+        knownLength: file.size || file.data.length,
+      })),
   };
 
   if (listName) {
@@ -115,18 +108,18 @@ module.exports = upload(async (req, res) => {
         .lists(listName)
         .members()
         .list();
-      const subscribedMembers = listMembers.items.filter(user => user.subscribed);
+      const subscribedMembers = listMembers.items.filter((user) => user.subscribed);
 
-      messageData.to = subscribedMembers.map(user => user.address);
+      messageData.to = subscribedMembers.map((user) => user.address);
       messageData['recipient-variables'] = subscribedMembers.reduce(
         (accumulator, user) => ({ ...accumulator, [user.address]: user }),
-        {}
+        {},
       );
     } catch (err) {
       return send(
         res,
         statuses['bad request'],
-        JSON.stringify({ error: `Error - On list load ${err.message}` })
+        JSON.stringify({ error: `Error - On list load ${err.message}` }),
       );
     }
   }
@@ -136,14 +129,14 @@ module.exports = upload(async (req, res) => {
 
     return send(
       res,
-      statuses['ok'],
-      JSON.stringify({ status: message, sentTo: messageData.to })
+      statuses.ok,
+      JSON.stringify({ status: message, sentTo: messageData.to }),
     );
   } catch (err) {
     return send(
       res,
       statuses['bad request'],
-      JSON.stringify({ error: `Error - On Email send ${err.message}` })
+      JSON.stringify({ error: `Error - On Email send ${err.message}` }),
     );
   }
 });

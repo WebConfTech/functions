@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
       searchOptions.sinceId = Number(options[OPTIONS.LAST_RESULT_ID].value);
       lastResultIdDoc = options[OPTIONS.LAST_RESULT_ID].doc;
     }
-    
+
     let tweets = await searchTweets(searchOptions);
 
     if (tweets.length) {
@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
           message: error.message,
           stack: error.stack,
         },
-      })
+      }),
     );
   }
 };
