@@ -14,6 +14,7 @@
     "test": "echo \"Write tests! -> D:\""
   },
   "dependencies": {
+    "firebase-admin": "^8.8.0",
     "mailgun-js": "^0.22.0",
     "micro": "^9.3.4",
     "micro-cors-multiple-allow-origin": "^1.0.1",
