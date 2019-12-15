@@ -9,6 +9,7 @@ const {
   filterBlacklistedTweets,
   normalizeTweetsHashtags,
   saveTweets,
+  saveTweetsHashtags,
 } = require('../lib/cfp');
 
 module.exports = async (req, res) => {
@@ -18,17 +19,15 @@ module.exports = async (req, res) => {
       query: options[OPTIONS.SEARCH_VALUE].value,
     };
 
-    let lastResultIdDoc = null;
     if (options[OPTIONS.LAST_RESULT_ID]) {
       searchOptions.sinceId = Number(options[OPTIONS.LAST_RESULT_ID].value);
-      lastResultIdDoc = options[OPTIONS.LAST_RESULT_ID].doc;
     }
 
     let tweets = await searchTweets(searchOptions);
 
     if (tweets.length) {
       const [{ id_str: lastResultId }] = tweets;
-      await updateLastResultId(lastResultId, lastResultIdDoc);
+      await updateLastResultId(lastResultId);
     }
 
     tweets = await formatTweets(tweets, options);
@@ -37,9 +36,16 @@ module.exports = async (req, res) => {
     tweets = await normalizeTweetsHashtags(tweets);
     tweets = await saveTweets(tweets);
 
-    res.end(JSON.stringify({
-      tweets: tweets.map(({ tweet, hashtags }) => ({ tweet, hashtags })),
-    }));
+    if (tweets.length) {
+      await saveTweetsHashtags(tweets);
+      res.end(JSON.stringify({
+        tweets: tweets.map(({ tweet, hashtags }) => ({ tweet, hashtags })),
+      }));
+    } else {
+      res.end(JSON.stringify({
+        message: 'No new tweets were found',
+      }));
+    }
   } catch (error) {
     return send(
       res,
@@ -48,7 +54,7 @@ module.exports = async (req, res) => {
         error: `Error on Twitter search: ${error.message}`,
         detail: {
           message: error.message,
-          stack: error.stack,
+          stack: error.stack.split('\n'),
         },
       }),
     );
