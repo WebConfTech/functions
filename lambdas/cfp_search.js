@@ -7,7 +7,6 @@ const {
   updateLastResultId,
   formatTweets,
   filterBlacklistedTweets,
-  normalizeTweetsHashtags,
   saveTweets,
   saveTweetsHashtags,
 } = require('../lib/cfp');
@@ -33,7 +32,6 @@ module.exports = async (req, res) => {
     tweets = await formatTweets(tweets, options);
     tweets = tweets.filter((info) => !!info.hashtags.length);
     tweets = await filterBlacklistedTweets(tweets);
-    tweets = await normalizeTweetsHashtags(tweets);
     tweets = await saveTweets(tweets);
 
     if (tweets.length) {
