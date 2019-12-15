@@ -7,19 +7,20 @@ const {
   updateLastResultId,
   formatTweets,
   filterBlacklistedTweets,
+  normalizeTweetsHashtags,
 } = require('../lib/cfp');
 
 module.exports = async (req, res) => {
   try {
-    const useOptions = await getOptions();
+    const options = await getOptions();
     const searchOptions = {
-      query: useOptions[OPTIONS.SEARCH_VALUE].value,
+      query: options[OPTIONS.SEARCH_VALUE].value,
     };
 
     let lastResultIdDoc = null;
-    if (useOptions[OPTIONS.LAST_RESULT_ID]) {
-      searchOptions.sinceId = Number(useOptions[OPTIONS.LAST_RESULT_ID].value);
-      lastResultIdDoc = useOptions[OPTIONS.LAST_RESULT_ID].doc;
+    if (options[OPTIONS.LAST_RESULT_ID]) {
+      searchOptions.sinceId = Number(options[OPTIONS.LAST_RESULT_ID].value);
+      lastResultIdDoc = options[OPTIONS.LAST_RESULT_ID].doc;
     }
     
     let tweets = await searchTweets(searchOptions);
@@ -29,11 +30,14 @@ module.exports = async (req, res) => {
       await updateLastResultId(lastResultId, lastResultIdDoc);
     }
 
-    tweets = formatTweets(tweets);
+    tweets = await formatTweets(tweets, options);
+    tweets = tweets.filter((info) => !!info.hashtags.length);
     tweets = await filterBlacklistedTweets(tweets);
+    tweets = await normalizeTweetsHashtags(tweets);
 
     res.end(JSON.stringify({ tweets }));
   } catch (error) {
+    console.log(error);
     return send(
       res,
       statuses['bad request'],
