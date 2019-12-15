@@ -38,6 +38,10 @@
       "dest": "/lambdas/cfp_process.js"
     },
     {
+      "src": "/cfp/hashtags",
+      "dest": "/lambdas/cfp_hashtags.js"
+    },
+    {
       "src": "/ping",
       "dest": "/lambdas/ping.js"
     }
