@@ -5,6 +5,8 @@ const {
   OPTIONS,
   getOptions,
   updateLastResultId,
+  formatTweets,
+  filterBlacklistedTweets,
 } = require('../lib/cfp');
 
 module.exports = async (req, res) => {
@@ -20,13 +22,17 @@ module.exports = async (req, res) => {
       lastResultIdDoc = useOptions[OPTIONS.LAST_RESULT_ID].doc;
     }
     
-    const tweets = await searchTweets(searchOptions);
+    let tweets = await searchTweets(searchOptions);
+
     if (tweets.length) {
       const [{ id_str: lastResultId }] = tweets;
       await updateLastResultId(lastResultId, lastResultIdDoc);
     }
 
-    res.end(JSON.stringify({ tweets: tweets.length }));
+    tweets = formatTweets(tweets);
+    tweets = await filterBlacklistedTweets(tweets);
+
+    res.end(JSON.stringify({ tweets }));
   } catch (error) {
     return send(
       res,
