@@ -8,6 +8,7 @@ const {
   formatTweets,
   filterBlacklistedTweets,
   normalizeTweetsHashtags,
+  saveTweets,
 } = require('../lib/cfp');
 
 module.exports = async (req, res) => {
@@ -34,14 +35,22 @@ module.exports = async (req, res) => {
     tweets = tweets.filter((info) => !!info.hashtags.length);
     tweets = await filterBlacklistedTweets(tweets);
     tweets = await normalizeTweetsHashtags(tweets);
+    tweets = await saveTweets(tweets);
 
-    res.end(JSON.stringify({ tweets }));
+    res.end(JSON.stringify({
+      tweets: tweets.map(({ tweet, hashtags }) => ({ tweet, hashtags })),
+    }));
   } catch (error) {
-    console.log(error);
     return send(
       res,
       statuses['bad request'],
-      JSON.stringify({ error: `Error on Twitter search: ${error.message}` })
+      JSON.stringify({
+        error: `Error on Twitter search: ${error.message}`,
+        detail: {
+          message: error.message,
+          stack: error.stack,
+        },
+      })
     );
   }
 };
