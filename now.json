@@ -52,6 +52,11 @@
     "TWITTER_CONSUMER_KEY": "@production-functions-twitter-consumer-key",
     "TWITTER_CONSUMER_SECRET": "@production-functions-twitter-consumer-secret",
     "TWITTER_ACCESS_TOKEN": "@production-functions-twitter-access-token",
-    "TWITTER_ACCESS_TOKEN_SECRET": "@production-functions-twitter-access-token-secret"
+    "TWITTER_ACCESS_TOKEN_SECRET": "@production-functions-twitter-access-token-secret",
+    "FIREBASE_PROJECT_ID": "@production-firebase-project-id",
+    "FIREBASE_PRIVATE_KEY_ID": "@production-firebase-private-key-id",
+    "FIREBASE_PRIVATE_KEY": "@production-firebase-private-key",
+    "FIREBASE_CLIENT_EMAIL": "@production-firebase-client-email",
+    "FIREBASE_CLIENT_ID": "@production-firebase-client-id"
   }
 }
