@@ -30,20 +30,23 @@ module.exports = async (req, res) => {
     }
 
     tweets = await formatTweets(tweets, options);
-    tweets = tweets.filter((info) => !!info.hashtags.length);
+    tweets = tweets.filter((info) => info.hashtags.length > 0);
     tweets = await filterBlacklistedTweets(tweets);
     tweets = await saveTweets(tweets);
 
+    let response;
     if (tweets.length) {
       await saveTweetsHashtags(tweets);
-      res.end(JSON.stringify({
+      response = JSON.stringify({
         tweets: tweets.map(({ tweet, hashtags }) => ({ tweet, hashtags })),
-      }));
+      });
     } else {
-      res.end(JSON.stringify({
+      response = JSON.stringify({
         message: 'No new tweets were found',
-      }));
+      });
     }
+
+    res.end(response);
   } catch (error) {
     return send(
       res,
