@@ -19,6 +19,7 @@ const requiredKeys = [
   'FIREBASE_PRIVATE_KEY',
   'FIREBASE_CLIENT_EMAIL',
   'FIREBASE_CLIENT_ID',
+  'CFP_SECRET',
 ];
 
 let envVars = {};

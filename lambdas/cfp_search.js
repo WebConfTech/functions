@@ -10,8 +10,19 @@ const {
   saveTweets,
   saveTweetsHashtags,
 } = require('../lib/cfp');
+const { CFP_SECRET } = require('../env');
 
 module.exports = async (req, res) => {
+  if (!req.query || !req.query.secret || req.query.secret !== CFP_SECRET) {
+    return send(
+      res,
+      statuses.unauthorized,
+      JSON.stringify({
+        error: 'Unauthorized',
+      }),
+    );
+  }
+
   try {
     const options = await getOptions();
     const searchOptions = {
