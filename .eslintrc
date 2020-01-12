@@ -1,0 +1,8 @@
+{
+  "extends": "airbnb-base",
+  "rules": {
+    "consistent-return": "off",
+    "no-useless-escape": "off",
+    "no-plusplus": "off"
+  }
+}

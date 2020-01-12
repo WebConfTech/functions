@@ -30,6 +30,18 @@
       "dest": "/lambdas/mail_unsubscribe.js"
     },
     {
+      "src": "/cfp/search",
+      "dest": "/lambdas/cfp_search.js"
+    },
+    {
+      "src": "/cfp/process",
+      "dest": "/lambdas/cfp_process.js"
+    },
+    {
+      "src": "/cfp/hashtags",
+      "dest": "/lambdas/cfp_hashtags.js"
+    },
+    {
       "src": "/ping",
       "dest": "/lambdas/ping.js"
     }
@@ -44,6 +56,16 @@
     "STAGING_MAILGUN_API_KEY": "@staging-functions-mailgun-api-key",
     "STAGING_MAILGUN_DOMAIN": "@staging-functions-mailgun-domain",
     "STAGING_MAILGUN_LIST": "@staging-functions-mailgun-list",
-    "STAGING_MAILGUN_SEND_SECRET": "@staging-functions-send-secret"
+    "STAGING_MAILGUN_SEND_SECRET": "@staging-functions-send-secret",
+    "TWITTER_CONSUMER_KEY": "@production-functions-twitter-consumer-key",
+    "TWITTER_CONSUMER_SECRET": "@production-functions-twitter-consumer-secret",
+    "TWITTER_ACCESS_TOKEN": "@production-functions-twitter-access-token",
+    "TWITTER_ACCESS_TOKEN_SECRET": "@production-functions-twitter-access-token-secret",
+    "FIREBASE_PROJECT_ID": "@production-functions-firebase-project-id",
+    "FIREBASE_PRIVATE_KEY_ID": "@production-functions-firebase-private-key-id",
+    "FIREBASE_PRIVATE_KEY": "@production-functions-firebase-private-key",
+    "FIREBASE_CLIENT_EMAIL": "@production-functions-firebase-client-email",
+    "FIREBASE_CLIENT_ID": "@production-functions-firebase-client-id",
+    "CFP_SECRET": "@production-functions-cfp-secret"
   }
 }

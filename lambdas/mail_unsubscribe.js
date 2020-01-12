@@ -17,7 +17,11 @@ module.exports = async (req, res) => {
       });
     }
 
-    if (!mg.validateWebhook(data.signature.timestamp, data.signature.token, data.signature.signature)) {
+    if (!mg.validateWebhook(
+      data.signature.timestamp,
+      data.signature.token,
+      data.signature.signature,
+    )) {
       return send(res, statuses['not allowed'], {
         message: 'Invalid signature',
       });
@@ -37,5 +41,5 @@ module.exports = async (req, res) => {
     });
   }
 
-  return send(res, statuses['ok'], {});
+  return send(res, statuses.ok, {});
 };
