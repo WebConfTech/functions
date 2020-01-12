@@ -14,6 +14,7 @@ module.exports = async (req, res) => {
     }
 
     const hashtags = await getHashtagsCount(useLimit);
+    res.setHeader('Cache-Control', 'max-age=0, s-maxage=300');
     res.end(JSON.stringify({ hashtags }));
   } catch (error) {
     return send(
