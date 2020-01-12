@@ -1,6 +1,6 @@
 {
   "name": "functions",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A collection of lambdas services for the CoDeAr & WebConf.",
   "repository": "somoscodear/functions",
   "author": "CoDeAr <hola@codear.org>",
